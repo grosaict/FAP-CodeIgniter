@@ -1,0 +1,51 @@
+* {
+    box-sizing:         content-box;
+    margin:             0px;
+    padding:            0px;
+}
+
+head,
+body {
+    width:              80vw;
+    margin:             2vh 10vw;
+}
+
+h1 {
+    width:              calc(100% / 3);
+}
+
+a{
+    float:              right;
+}
+table {
+    font-family:        arial, sans-serif;
+    border-collapse:    collapse;
+    width:              100%;
+}
+
+td,
+th {
+    border:             0.1px solid #dddddd;
+    text-align:         left;
+    padding:            8px;
+}
+
+tr:nth-child(even) {
+    background-color:   lightskyblue;
+}
+
+label {
+    font-size:          1em;
+}
+
+input {
+    font-size:          0.8em;
+    border-radius:      5px;
+    background-color: lightblue;
+    margin:             5px;
+    text-transform:     uppercase;
+}
+
+p {
+    color: black;
+}
