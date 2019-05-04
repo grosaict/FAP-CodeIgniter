@@ -1,3 +1,3 @@
 <h4 style="color:red">
-    Cadastro não realizado. Pizza já existente!
+    Operação não realizada. Item já cadastrado!
 </h4>

@@ -1,6 +1,4 @@
-<link rel="stylesheet" href="/application/views/css/style.css">
-
-<?php $this->load->view('pages/header'); ?>
+<?php $this->load->view('templates/header'); ?>
 <h3>Cadastro de Pizzas</h3>
 <br/>
 <?php echo form_open('pizzas/save_pizza'); ?>
@@ -12,3 +10,5 @@
     <br/>
     <input type="submit" name="submit" value="Salvar"/>
 </form>
+
+<?php $this->load->view('templates/footer'); ?>

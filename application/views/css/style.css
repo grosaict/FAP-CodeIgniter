@@ -10,13 +10,20 @@ body {
     margin:             2vh 10vw;
 }
 
-h1 {
-    width:              calc(100% / 3);
+h1, h3 {
+    width:              60vw;
 }
 
 a{
     float:              right;
 }
+
+#header_title {
+    float:              left;
+    text-decoration:    none;
+    color:              black;
+}
+
 table {
     font-family:        arial, sans-serif;
     border-collapse:    collapse;

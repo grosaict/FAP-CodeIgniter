@@ -24,7 +24,6 @@ class Pizzas extends CI_Controller {
         $pizza = array(
             'pizza' => strtoupper($this->input->post('pizza'))
         );
-
         if ($this->validate_new_pizza ($pizza['pizza'])) {
             $this->pizzas_model->insert_pizza($pizza);
             //Volta para a tabela mostrando msg de sucesso!
