@@ -17,4 +17,8 @@ class Ingredients_Model extends CI_Model{
     public function insert_ingredient($ingredient){
         return $this->db->insert('tb_ingredient', $ingredient);
     }
+
+    public function edit_ingredient($ingredient){
+        $this->db->update('tb_ingredient', $ingredient, array('id_ingredient' => $ingredient['id_ingredient']));
+    }
 }

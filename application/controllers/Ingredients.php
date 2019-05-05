@@ -50,4 +50,22 @@ class Ingredients extends CI_Controller {
         endforeach;
         return true;
     }
+
+    public function edit_ingredient($args){
+        $id_ingredient = (int) $args[0];
+
+        $this->list_all_ingredients();
+    }
+
+    public function edit_ind_available($args){
+        $id_ingredient = (int) $args[0];
+        // Retorna o objeto ingrediente pelo id enviado por parâmetro
+        $ingredient = $this->ingredients_model->return_ingredient($id_ingredient);
+
+        // Altera o indicador de disponibilidade
+        if ($ingredient[0]['ind_available'] == false) { $ingredient[0]['ind_available'] = true;
+        } else {                                        $ingredient[0]['ind_available'] = false; }
+        $this->ingredients_model->edit_ingredient($ingredient[0]);
+        $this->list_all_ingredients();
+    }
 }

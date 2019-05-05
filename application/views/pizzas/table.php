@@ -5,12 +5,12 @@
 <table>
     <tr>
         <th>Nome</th>
-        <!-- <th>Ingredientes</th> -->
+        <th>Ingredientes</th>
     </tr>
     <?php foreach ($pizzas as $pizzas_item): ?>
     <tr>
         <td><?php echo $pizzas_item['pizza']; ?></td>
-        <!-- <td><?php echo $pizzas_item['pizza_ingredients']; ?></td>-->
+        <td><?php echo $pizzas_item['pizza_ingredients']; ?></td>
     </tr>
     <?php endforeach; ?>        
 </table>

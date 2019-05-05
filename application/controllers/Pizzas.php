@@ -16,26 +16,28 @@ class Pizzas extends CI_Controller {
         // Percorre a lista de pizzas para montar string de ingredientes concatenada
         foreach ($pizzas as $pizzas_item):
             $pizzas_item['pizza_ingredients'] = "";
-            // retorna a array de pizza_ingredients
+            // Retorna a array de pizza_ingredients
             $pizza_ingredients = $this->pizza_ingredients_model->return_all_pizza_ingredients($pizzas_item['id_pizza']);
-            echo print_r($pizza_ingredients);
 
-            // percorre array para buscar descrição por id e já concatena a string
-            //foreach ($pizza_ingredients as $pizza_ingredients_item):
-                //$ingredient = $this->ingredients_model->return_ingredient($pizza_ingredients_item['id_ingredient']);
-                //echo print_r($ingredient);
-                //$pizzas_item['pizza_ingredients'] = $pizzas_item['pizza_ingredients'].', '.$ingredient['id_ingredient'];
-            //endforeach;
-            //echo $pizzas_item['id_pizza'] ."-". $pizzas_item['pizza_ingredients'];
+            // Percorre array para buscar descrição por id e já concatena em uma string
+            foreach ($pizza_ingredients as $pizza_ingredients_item):
+                $ingredient = $this->ingredients_model->return_ingredient($pizza_ingredients_item['id_ingredient']);
+                if ($ingredient[0]['ind_available'] == true) {
+                    $pizzas_item['pizza_ingredients'] = $pizzas_item['pizza_ingredients'].$ingredient[0]['ingredient'].', ';
+                } else {
+                    $pizzas_item['pizza_ingredients'] = $pizzas_item['pizza_ingredients'].'<strike>'.$ingredient[0]['ingredient'].'</strike>, ';
+                }
+            endforeach;
+            // Retira a última vírgula
+            $size = strlen($pizzas_item['pizza_ingredients']);
+            $pizzas_item['pizza_ingredients'] = substr($pizzas_item['pizza_ingredients'],0, $size-2);
+
+            // Monta novo array de pizzas já com os ingredientes
+            $new_pizzas[] = $pizzas_item;
         endforeach;
 
-
-        //SELECT * FROM `tb_pizza`, `tb_ingredient_pizza`, `tb_ingredient` WHERE `tb_pizza`.`id_pizza` = `tb_ingredient_pizza`.`id_pizza`
-        //<h4 style="color:red">Operação não realizada. Item já cadastrado!</h4>
-
-
-        // Cria o parâmetro 'pizzas' para ser usado pela view
-        $data['pizzas'] = $pizzas;
+        // Inclui o array no parâmetro 'pizzas' para ser usado pela view
+        $data['pizzas'] = $new_pizzas;
         $this->load->view('pizzas/table', $data);
     }
 
