@@ -1,5 +1,5 @@
 <?php $this->load->view('templates/header'); ?>
-<h3>Cadastro de Pizzas</h3>
+<h3>Cadastro/Edição de Pizzas</h3>
 <br/>
 <?php echo form_open('pizzas/save_pizza'); ?>
 

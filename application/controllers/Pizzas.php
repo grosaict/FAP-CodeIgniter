@@ -22,10 +22,11 @@ class Pizzas extends CI_Controller {
             // Percorre array para buscar descrição por id e já concatena em uma string
             foreach ($pizza_ingredients as $pizza_ingredients_item):
                 $ingredient = $this->ingredients_model->return_ingredient($pizza_ingredients_item['id_ingredient']);
-                if ($ingredient[0]['ind_available'] == true) {
-                    $pizzas_item['pizza_ingredients'] = $pizzas_item['pizza_ingredients'].$ingredient[0]['ingredient'].', ';
+                //echo '<pre>'; print_r($ingredient);
+                if ($ingredient->ind_available == true) {
+                    $pizzas_item['pizza_ingredients'] = $pizzas_item['pizza_ingredients'].$ingredient->ingredient.', ';
                 } else {
-                    $pizzas_item['pizza_ingredients'] = $pizzas_item['pizza_ingredients'].'<strike>'.$ingredient[0]['ingredient'].'</strike>, ';
+                    $pizzas_item['pizza_ingredients'] = $pizzas_item['pizza_ingredients'].'<strike>'.$ingredient->ingredient.'</strike>, ';
                 }
             endforeach;
             // Retira a última vírgula
@@ -44,7 +45,6 @@ class Pizzas extends CI_Controller {
     public function new_pizza(){
         $this->load->helper('form');
         $this->load->view('pizzas/form');
-        
     }
 
     public function save_pizza(){

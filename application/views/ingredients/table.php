@@ -12,14 +12,14 @@
     <tr>
         <td><?php echo $ingredients_item['ingredient']; ?></td>
         <?php if ($ingredients_item['ind_available'] == true) { ?>
-            <td><?php print "SIM";?></td>
+            <td><?php echo "SIM";?></td>
             <td>
                 <a href="<?php echo base_url('ingredients/edit_ingredient/'.$ingredients_item['id_ingredient']);?>">editar</a>
                 <br/>
                 <a href="<?php echo base_url('ingredients/edit_ind_available/'.$ingredients_item['id_ingredient']);?>">em falta</a>
             </td>
         <?php } else { ?>
-            <td><?php print "NÃO";?></td>
+            <td><?php echo "NÃO";?></td>
             <td>
                 <a href="<?php echo base_url('ingredients/edit_ingredient/'.$ingredients_item['id_ingredient']);?>">editar</a>
                 <br/>

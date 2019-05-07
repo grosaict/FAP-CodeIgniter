@@ -11,7 +11,7 @@ class Ingredients_Model extends CI_Model{
 
     public function return_ingredient($id_ingredient){
         $query = $this->db->get_where('tb_ingredient', array('id_ingredient' => $id_ingredient));
-        return $query->result_array();
+        return $query->row();
     }
 
     public function insert_ingredient($ingredient){
@@ -19,6 +19,6 @@ class Ingredients_Model extends CI_Model{
     }
 
     public function edit_ingredient($ingredient){
-        $this->db->update('tb_ingredient', $ingredient, array('id_ingredient' => $ingredient['id_ingredient']));
+        $this->db->update('tb_ingredient', $ingredient, array('id_ingredient' => $ingredient->id_ingredient));
     }
 }
