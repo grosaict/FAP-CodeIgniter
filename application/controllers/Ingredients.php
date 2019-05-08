@@ -20,12 +20,17 @@ class Ingredients extends CI_Controller {
 
     public function save_ingredient(){
         //Pega os dados e salva no banco
-        $ingredient = array(
+        $ingredient = (object) array(
+            'id_ingredient' => $this->input->post('id_ingredient'),
             'ingredient' => strtoupper($this->input->post('ingredient')),
             'ind_available' => $this->input->post('ind_available')
         );
-        if ($this->validate_new_ingredient ($ingredient['ingredient'])) {
-            $this->ingredients_model->insert_ingredient($ingredient);
+        if ($this->validate_new_ingredient ($ingredient)) {
+            if ($ingredient->id_ingredient == null) {
+                $this->ingredients_model->insert_ingredient($ingredient);
+            } else {
+                $this->ingredients_model->update_ingredient($ingredient);
+            }
             //Volta para a tabela mostrando msg de sucesso!
             $this->load->view('pages/success'); 
         } else {
@@ -39,16 +44,18 @@ class Ingredients extends CI_Controller {
         //Define caracteres a serem desconsiderados
         $eliminate = array(" ", ".", "-", "_");
         //Retira caracteres antes de executar o teste
-        $new_ingredient = str_replace($eliminate, '', $new_ingredient);
+        $new_ingredient->ingredient = str_replace($eliminate, '', $new_ingredient->ingredient);
         //Verifica se não está vazio
-        if ($new_ingredient == '') : return false; endif;
+        if ($new_ingredient->ingredient == '') : return false; endif;
 
         $ingredients = $this->ingredients_model->return_all_ingredients();
 
         foreach ($ingredients as $ingredients_item) :
             //Retira caracteres antes de executar o teste
             $ingredients_item['ingredient'] = str_replace($eliminate, '', $ingredients_item['ingredient']);
-            if ($ingredients_item['ingredient'] == $new_ingredient) : return false; endif;
+            if (    ($ingredients_item['ingredient'] == $new_ingredient->ingredient)
+                &&  ($ingredients_item['id_ingredient'] != $new_ingredient->id_ingredient))
+            : return false; endif;
         endforeach;
         return true;
     }
@@ -61,7 +68,7 @@ class Ingredients extends CI_Controller {
         // Altera o indicador de disponibilidade
         if ($ingredient->ind_available == false) {  $ingredient->ind_available = true;
         } else {                                    $ingredient->ind_available = false; }
-        $this->ingredients_model->edit_ingredient($ingredient);
+        $this->ingredients_model->update_ingredient($ingredient);
         $this->list_all_ingredients();
     }
 
