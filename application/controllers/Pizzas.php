@@ -43,12 +43,17 @@ class Pizzas extends CI_Controller {
     }
 
     public function new_pizza(){
+        $data['pizza'] = null;
+        $data['ingredients'] = $this->ingredients_model->return_all_ingredients();
         $this->load->helper('form');
-        $this->load->view('pizzas/form');
+        $this->load->view('pizzas/form', $data);
     }
 
     public function save_pizza(){
         //Pega os dados e salva no banco
+        echo print_r($this->input->post('check'));
+        $pizza_ingredients[] = '';
+        (isset($var)) ? $pizza_ingredients[] = '' : '';
         $pizza = array(
             'pizza' => strtoupper($this->input->post('pizza'))
         );

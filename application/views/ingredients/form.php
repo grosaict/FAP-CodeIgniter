@@ -1,5 +1,6 @@
 <?php $this->load->view('templates/header'); ?>
 <h3>Cadastro/Edição de Ingredientes</h3>
+<a href="<?php echo base_url('ingredients');?>">Voltar</a>
 <br/>
 <?php
     echo form_open('ingredients/save_ingredient');

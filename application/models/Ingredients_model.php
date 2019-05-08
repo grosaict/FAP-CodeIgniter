@@ -5,6 +5,7 @@ class Ingredients_Model extends CI_Model{
     }
 
     public function return_all_ingredients(){
+        $this->db->order_by('ingredient', 'ASC');
         $query = $this->db->get("tb_ingredient");
         return $query->result_array();
     }

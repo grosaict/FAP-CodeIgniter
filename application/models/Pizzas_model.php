@@ -5,6 +5,7 @@ class Pizzas_Model extends CI_Model{
     }
 
     public function return_all_pizzas(){
+        $this->db->order_by('pizza', 'ASC');
         $query  = $this->db->get("tb_pizza");
         return $query->result_array();
     }
