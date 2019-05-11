@@ -45,21 +45,34 @@ class Pizzas extends CI_Controller {
     public function new_pizza(){
         $data['pizza'] = null;
         $data['ingredients'] = $this->ingredients_model->return_all_ingredients();
+        $data['pizza_ingredients']  = null;
         $this->load->helper('form');
         $this->load->view('pizzas/form', $data);
     }
 
     public function save_pizza(){
-        //Pega os dados e salva no banco
-        echo print_r($this->input->post('check'));
-        $pizza_ingredients[] = '';
-        (isset($var)) ? $pizza_ingredients[] = '' : '';
-        $pizza = array(
-            'pizza' => strtoupper($this->input->post('pizza'))
+        //Salva o nome da pizza em uma row de um array
+        $pizza = (object) array(
+            'id_pizza'  => $this->input->post('id_pizza'),
+            'pizza'     => strtoupper($this->input->post('pizza'))
         );
-        if ($this->validate_new_pizza ($pizza['pizza'])) {
-            $this->pizzas_model->insert_pizza($pizza);
-            //Volta para a tabela mostrando msg de sucesso!
+        //Valida o nome da pizza informado pelo usuário
+        if ($this->validate_new_pizza ($pizza)) {
+            //Retorna a lista de ingredientes selecionada no formulário
+            $pizza_ingredients = $this->input->post('check');
+
+            if ($pizza->id_pizza == null) {
+                //Insere pizza no BD e traz retorna seu id
+                $this->pizzas_model->insert_pizza($pizza);
+                $pizza->id_pizza  = $this->db->insert_id();
+           } else {
+                $this->pizzas_model->update_pizza($pizza);
+                //Excluir os ingredientes da pizza para atualização
+                $this->pizza_ingredients_model->delete_pizza_ingredients($pizza->id_pizza);
+            }
+            //Atualiza os ingredientes da pizza
+            isset($pizza_ingredients) ? $this->update_pizza_ingredient($pizza->id_pizza, $pizza_ingredients) : "";
+             //Volta para a tabela mostrando msg de sucesso!
             $this->load->view('pages/success'); 
         } else {
             //Volta para a tabela mostrando msg de falha!
@@ -68,17 +81,48 @@ class Pizzas extends CI_Controller {
         $this->list_all_pizzas();
     }
 
+    public function update_pizza($id_pizza){
+        $data['pizza']              = $this->pizzas_model->return_pizza_byId($id_pizza);
+        $data['ingredients']        = $this->ingredients_model->return_all_ingredients();
+        $data['pizza_ingredients']  = $this->pizza_ingredients_model->return_all_pizza_ingredients($id_pizza);
+        $this->load->helper('form');
+        $this->load->view('pizzas/form', $data);
+    }
+
+    private function update_pizza_ingredient($new_id_pizza, $pizza_ingredients) {
+        foreach ($pizza_ingredients as $pizza_ingredients_item) :
+            $pizza_ingredient = array(
+                'id_pizza'      => $new_id_pizza,
+                'id_ingredient' => $pizza_ingredients_item
+            );
+            $this->pizza_ingredients_model->insert_pizza_ingredient($pizza_ingredient);
+        endforeach;
+    }
+
+    public function delete_pizza($id_pizza){
+        $pizza  = $this->pizzas_model->return_pizza_byId($id_pizza);
+        if (isset($pizza)) {
+            $this->pizza_ingredients_model->delete_pizza_ingredients($id_pizza);
+            $this->pizzas_model->delete_pizza($id_pizza);
+            $this->load->view('pages/success');
+        }else{
+            $this->load->view('pages/delete_failed');
+        };
+        $this->list_all_pizzas();
+    }
+
     private function validate_new_pizza ($new_pizza) {
         $pizzas = $this->pizzas_model->return_all_pizzas();
 
         //Define caracteres a serem desconsiderados
-        $eliminate = array(" ", ".", "-", "_");
-        $new_pizza = str_replace($eliminate, '', $new_pizza);
+        $eliminate  = array(" ", ".", "-", "_");
+        $new_value  = str_replace($eliminate, '', $new_pizza->pizza);
 
         //Retira caracteres antes de executar o teste
         foreach ($pizzas as $pizzas_item) :
             $pizzas_item['pizza'] = str_replace($eliminate, '', $pizzas_item['pizza']);
-            if ($pizzas_item['pizza'] == $new_pizza) :
+            if (    $pizzas_item['pizza'] == $new_value
+                &&  $pizzas_item['id_pizza'] != $new_pizza->id_pizza) :
                 return false;
             endif;
         endforeach;

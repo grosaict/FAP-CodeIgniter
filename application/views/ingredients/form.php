@@ -6,7 +6,7 @@
     echo form_open('ingredients/save_ingredient');
     $html_rd1   = "checked";
     $html_rd2   = "";
-if (is_null($ingredient)) {
+    if (is_null($ingredient)) {
         $html_id_ingredient = null;
         $html_ingredient    = "";
     } else {

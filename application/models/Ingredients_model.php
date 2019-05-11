@@ -20,6 +20,7 @@ class Ingredients_Model extends CI_Model{
     }
 
     public function update_ingredient($ingredient){
-        $this->db->update('tb_ingredient', $ingredient, array('id_ingredient' => $ingredient->id_ingredient));
+        $this->db->where('id_ingredient', $ingredient->id_ingredient);
+        $this->db->update('tb_ingredient', $ingredient);
     }
 }

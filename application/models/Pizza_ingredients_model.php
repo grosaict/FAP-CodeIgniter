@@ -12,4 +12,9 @@ class Pizza_Ingredients_Model extends CI_Model{
     public function insert_pizza_ingredient($pizza_ingredient){
         return $this->db->insert('tb_ingredient_pizza', $pizza_ingredient);
     }
+
+    public function delete_pizza_ingredients($id_pizza){
+        $this->db->where('id_pizza', $id_pizza);
+        $this->db->delete('tb_ingredient_pizza');
+    }
 }

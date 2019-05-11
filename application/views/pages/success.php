@@ -1,3 +1,3 @@
 <h4 style="color:red">
-    Cadastro realizado com sucesso!
+    Operação realizada com sucesso!
 </h4>

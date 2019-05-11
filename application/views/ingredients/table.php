@@ -8,24 +8,22 @@
         <th>Em estoque</th>
         <th>Ações</th>
     </tr>
-    <?php foreach ($ingredients as $ingredients_item): ?>
+    <?php foreach ($ingredients as $ingredients_item):
+        if ($ingredients_item['ind_available'] == true) {
+            $ind_available      = "SIM";
+            $update_ind_available = "em falta";
+        } else {
+            $ind_available      = "NÃO";
+            $update_ind_available = "em estoque";
+        } ?>
     <tr>
         <td><?php echo $ingredients_item['ingredient']; ?></td>
-        <?php if ($ingredients_item['ind_available'] == true) { ?>
-            <td><?php echo "SIM";?></td>
-            <td>
-                <a href="<?php echo base_url('ingredients/edit_ingredient/'.$ingredients_item['id_ingredient']);?>">editar</a>
-                <br/>
-                <a href="<?php echo base_url('ingredients/edit_ind_available/'.$ingredients_item['id_ingredient']);?>">em falta</a>
-            </td>
-        <?php } else { ?>
-            <td><?php echo "NÃO";?></td>
-            <td>
-                <a href="<?php echo base_url('ingredients/edit_ingredient/'.$ingredients_item['id_ingredient']);?>">editar</a>
-                <br/>
-                <a href="<?php echo base_url('ingredients/edit_ind_available/'.$ingredients_item['id_ingredient']);?>">em estoque</a>
-            </td>
-        <?php } ?>
+        <td><?php echo $ind_available; ?></td>
+        <td>
+            <a href="<?php echo base_url('ingredients/update_ingredient/'.$ingredients_item['id_ingredient']);?>">editar</a>
+            <br/>
+            <a href="<?php echo base_url('ingredients/update_ind_available/'.$ingredients_item['id_ingredient']);?>"><?php echo $update_ind_available ?></a>
+        </td>
     </tr>
     <?php endforeach; ?>        
 </table>
