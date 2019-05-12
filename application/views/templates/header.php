@@ -9,5 +9,7 @@
                 <link rel="stylesheet" href="/application/views/css/style.css">
         </head>
         <body>
-                <a href="http://localhost:8888/" id="header_title"><h1>Sistema de Pizzaria</h1></a>
+                <a href="<?php echo $this->config->item('base_url'); ?>" id="header_title"><h1>Sistema de Pizzaria</h1></a>
                 <br/>
+                <a href="<?php echo $this->config->item('base_url').'/logoff'; ?>">Logoff</a>
+                <br/><br/>

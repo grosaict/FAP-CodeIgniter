@@ -3,6 +3,10 @@ class Ingredients extends CI_Controller {
     public function __construct()
     {
             parent::__construct();
+            $logged = $this->session->userdata('logged');
+            if (!isset($logged) || $logged != true) {
+                header("Location: ".$this->config->item('base_url'));
+            }  
             $this->load->model('ingredients_model');
             $this->load->helper('url_helper');
     }

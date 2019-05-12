@@ -1,19 +1,20 @@
 <?php
 class Pages extends CI_Controller {
+        public function view($page = 'home') {
+                if ( ! file_exists(APPPATH.'views/pages/'.$page.'.php')) {
+                        // Whoops, we don't have a page for that!
+                        show_404();
+                }
 
-        public function view($page = 'home')
-        {
-            if ( ! file_exists(APPPATH.'views/pages/'.$page.'.php'))
-            {
-                    // Whoops, we don't have a page for that!
-                    show_404();
-            }
-    
-            $data['title'] = ucfirst($page); // Capitalize the first letter
-    
-            $this->load->view('templates/header', $data);
-            $this->load->view('pages/'.$page, $data);
-            $this->load->view('templates/footer', $data);
+                $logged = $this->session->userdata('logged');
+
+                if (isset($logged) && $logged == true) {
+                        $data['title'] = ucfirst($page); // Capitalize the first letter
+                        $this->load->view('templates/header', $data);
+                        $this->load->view('pages/'.$page, $data);
+                        $this->load->view('templates/footer', $data);
+                } else {
+                        $this->load->view('login/login_view');
+                }
         }
-    
 }
