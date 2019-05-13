@@ -22,6 +22,7 @@ class Login extends CI_Controller {
             if ($membership_validation) { // VERIFICA LOGIN E SENHA
                 $userdata = array(
                     'username'  => $this->input->post('username'),
+                    'password'  => md5($this->input->post('password')),
                     'logged'    => true
                 );
                 $this->session->set_userdata($userdata);

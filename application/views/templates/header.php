@@ -11,5 +11,5 @@
         <body>
                 <a href="<?php echo $this->config->item('base_url'); ?>" id="header_title"><h1>Sistema de Pizzaria</h1></a>
                 <br/>
-                <a href="<?php echo $this->config->item('base_url').'/logoff'; ?>">Logoff</a>
+                <a href="<?php echo $this->config->item('base_url').'/logoff'; ?>">Logoff de <?php echo '<b>'.$this->session->userdata('username').'</b>'; ?></a>
                 <br/><br/>

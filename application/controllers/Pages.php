@@ -5,11 +5,15 @@ class Pages extends CI_Controller {
                         // Whoops, we don't have a page for that!
                         show_404();
                 }
-
                 $logged = $this->session->userdata('logged');
 
                 if (isset($logged) && $logged == true) {
+                        $this->load->model('memberships_model');
+                        if ($this->memberships_model->access_level() == 0){
+                            header("Location: ".$this->config->item('base_url')."/logoff");
+                        }
                         $data['title'] = ucfirst($page); // Capitalize the first letter
+
                         $this->load->view('templates/header', $data);
                         $this->load->view('pages/'.$page, $data);
                         $this->load->view('templates/footer', $data);

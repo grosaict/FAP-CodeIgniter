@@ -53,6 +53,10 @@ input {
     text-transform:     uppercase;
 }
 
+#username {
+    text-transform:     none;
+}
+
 p {
     color: black;
 }

@@ -63,14 +63,21 @@ INSERT INTO tb_ingredient_pizza(id_pizza, id_ingredient)
         		(1, 2),
             (1, 5);
 
+
 -- Estrutura da tabela de usuarios
 
-CREATE TABLE IF NOT EXISTS `tb_membership` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(32) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `status` tinyint(1) NOT NULL,
+CREATE TABLE IF NOT EXISTS tb_membership (
+  id_membership int(11) NOT NULL AUTO_INCREMENT,
+  username varchar(32) NOT NULL,
+  password varchar(32) NOT NULL,
+  status tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
+-- Inserção dados de teste na tabela de usuarios
 
+INSERT INTO tb_membership(username, password, status)
+		VALUES	('router',  'router', 9),
+            ('fulano',  '123456', 1),
+        		('ciclana', '123456', 0),
+            ('maria',   '123456', 2);

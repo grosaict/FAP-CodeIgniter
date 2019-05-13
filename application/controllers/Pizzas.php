@@ -3,10 +3,10 @@ class Pizzas extends CI_Controller {
     public function __construct()
     {
             parent::__construct();
-            $logged = $this->session->userdata('logged');
-            if (!isset($logged) || $logged != true) {
-                header("Location: ".$this->config->item('base_url'));
-            }  
+            $this->load->model('memberships_model');
+            if ($this->memberships_model->access_level() == 0){
+                header("Location: ".$this->config->item('base_url')."/logoff");
+            }
             $this->load->model('pizzas_model');
             $this->load->model('ingredients_model');
             $this->load->model('pizza_ingredients_model');
