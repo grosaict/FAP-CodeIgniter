@@ -14,7 +14,7 @@
         switch ($memberships_item['status']){
             case (1):   $status = "Usuário";        break;
             case (2):   $status = "Administrador";  break;
-            case (9):   $status = "Router";         break;
+            case (9):   $status = "Root";           break;
             default:    $status = "Inativo";        break;
         }
     ?>
