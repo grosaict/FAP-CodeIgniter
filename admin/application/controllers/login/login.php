@@ -18,7 +18,7 @@ class Login extends CI_Controller {
             $this->load->view('login/login_view');
         } else {
             $membership_validation = $this->memberships_model->validate_membership();
-            $this->load->helper('url');
+            $this->load->helper('url_helper');
             if ($membership_validation) { // VERIFICA LOGIN E SENHA
                 $userdata = array(
                     'username'  => $this->input->post('username'),

@@ -55,15 +55,6 @@ CREATE TABLE IF NOT EXISTS tb_ingredient_pizza (
   FOREIGN KEY (id_ingredient)	REFERENCES tb_ingredient(id_ingredient)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
-
--- Inserção dados de teste na tabela de pedidos
-
-INSERT INTO tb_ingredient_pizza(id_pizza, id_ingredient)
-		VALUES	(1, 1),
-        		(1, 2),
-            (1, 5);
-
-
 -- Estrutura da tabela de usuarios
 
 CREATE TABLE IF NOT EXISTS tb_membership (
@@ -71,13 +62,13 @@ CREATE TABLE IF NOT EXISTS tb_membership (
   username varchar(32) NOT NULL,
   password varchar(32) NOT NULL,
   status tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (id_membership)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 -- Inserção dados de teste na tabela de usuarios
 
 INSERT INTO tb_membership(username, password, status)
-		VALUES	('router',  'router', 9),
+		VALUES	('Root',    'root', 9),
             ('fulano',  '123456', 1),
         		('ciclana', '123456', 0),
             ('maria',   '123456', 2);
