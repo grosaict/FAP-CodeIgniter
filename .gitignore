@@ -32,4 +32,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 # Sessions log
 #-------------------------
-application/sessions/
+admin/sessions/
