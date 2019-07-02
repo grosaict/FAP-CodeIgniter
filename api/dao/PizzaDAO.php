@@ -1,5 +1,6 @@
 <?php
     include_once 'model/Pizza.php';
+    include_once 'model/Pizzas.php';
     include_once 'model/Ingredient.php';
 	include_once 'PDOFactory.php';
 
@@ -11,12 +12,12 @@
     		$pdo = PDOFactory::getConexao();
 	    	$comando = $pdo->prepare($query);
     		$comando->execute();
-            $pizzas = [];
+            $pizza = [];
 		    while($p_row = $comando->fetch(PDO::FETCH_OBJ)){
-                $ing = $this->get_ingredients($p_row->id_pizza);
-			    $pizzas[] = new Pizza($p_row->id_pizza, $p_row->pizza, $ing->available, $ing->ingredients);
+                $ingredients = $this->get_ingredients($p_row->id_pizza);
+			    $pizza[] = new Pizza($p_row->id_pizza, $p_row->pizza, $ingredients);
             }
-            return $pizzas;
+            return new Pizzas($pizza);
         }
 
         public function get_ingredients($id_pizza)
@@ -27,16 +28,16 @@
             $comando = $pdo->prepare($query);
             $comando->bindParam (":id_pizza", $id_pizza);
             $comando->execute();
-            $ing->available     = true;
-            $ing->ingredients   = [];
+            $available     = true;
+            $ingredients   = [];
 		    while($i_row = $comando->fetch(PDO::FETCH_OBJ)){
                 $ingredient         = (object) $this->get_ingredient($i_row->id_ingredient);
-                $ing->ingredients[] = $ingredient;
+                $ingredients[] = $ingredient;
                 if (!$ingredient->available) {
-                    $ing->available     = false;
+                    $available     = false;
                 }
             }
-            return $ing;
+            return $ingredients;
         }
 
         public function get_ingredient($id_ingredient)
