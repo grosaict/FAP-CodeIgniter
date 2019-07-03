@@ -15,7 +15,9 @@
             $pizza = [];
 		    while($p_row = $comando->fetch(PDO::FETCH_OBJ)){
                 $ingredients = $this->get_ingredients($p_row->id_pizza);
-			    $pizza[] = new Pizza($p_row->id_pizza, $p_row->pizza, $ingredients);
+                if ($ingredients) {
+                    $pizza[] = new Pizza($p_row->id_pizza, $p_row->pizza, $ingredients);
+                }
             }
             return new Pizzas($pizza);
         }
@@ -23,7 +25,7 @@
         public function get_ingredients($id_pizza)
         {
             $query =   'SELECT * FROM tb_ingredient_pizza
-                        WHERE id_pizza=:id_pizza';		
+                        WHERE id_pizza=:id_pizza';
             $pdo = PDOFactory::getConexao(); 
             $comando = $pdo->prepare($query);
             $comando->bindParam (":id_pizza", $id_pizza);
@@ -32,10 +34,10 @@
             $ingredients   = [];
 		    while($i_row = $comando->fetch(PDO::FETCH_OBJ)){
                 $ingredient         = (object) $this->get_ingredient($i_row->id_ingredient);
-                $ingredients[] = $ingredient;
                 if (!$ingredient->available) {
-                    $available     = false;
+                    return false;
                 }
+                $ingredients[] = $ingredient;
             }
             return $ingredients;
         }
