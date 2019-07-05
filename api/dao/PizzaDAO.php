@@ -6,7 +6,7 @@
 
     class PizzaDAO
     {
-        public function get_pizzas()
+        public function get_available_pizzas()
         {
 		    $query = 'SELECT * FROM tb_pizza';
     		$pdo = PDOFactory::getConexao();
