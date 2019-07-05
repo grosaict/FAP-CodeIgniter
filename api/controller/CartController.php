@@ -56,6 +56,17 @@
             return $response;
         }
 
+        public function clean_cart($request, $response)
+        {
+            session_start();
+            session_unset();
+            session_destroy();
+            $response = $response->withJson(null);
+            $response = $response->withHeader('Content-type', 'application/json');    
+            $response = $response->withStatus(202);
+            return $response;
+        }
+
         public function count_cart($request, $response)
         {
             session_start();

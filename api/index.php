@@ -16,6 +16,11 @@ $app->group('/cart', function(){
     $this->get('/get_cart','CartController:get_cart');
     $this->get('/count','CartController:count_cart');
     $this->delete('/delete_pizza_cart/{index:[0-99]+}','CartController:delete_pizza_cart');
+    $this->delete('/clean_cart','CartController:clean_cart');
+});
+$app->group('/order', function(){
+    // $this->post('','OrderController:submit_order');
+    $this->get('','CartController:get_cart');
 });
 
 try

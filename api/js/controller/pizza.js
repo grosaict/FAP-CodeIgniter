@@ -17,7 +17,7 @@ Vue.component('list-pizzas', {
                 .then(response=>{
                     console.log("Response (cart_add): ", response);
                 });
-        }
+        },
     },
 });
 

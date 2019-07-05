@@ -60,28 +60,17 @@
         </div>
 
         <div id="Pizza" class="w3-container menu w3-padding-32 w3-white">
-          <list-pizzas v-bind:pizzaslist="pizzas"></list-pizzas>
+            <list-pizzas v-bind:pizzaslist="pizzas"></list-pizzas>
         </div>
 
         <div id="Drinks" class="w3-container menu w3-padding-32 w3-white">
           <h1><b>Refrigerante</b> <span class="w3-tag w3-grey w3-round">Popular</span> <span class="w3-right w3-tag w3-dark-grey w3-round">R$6.00</span></h1>
           <p class="w3-text-grey">Pepsi, Teem, Sukita, Kuat</p>
           <hr>
-      
-          <h1><b>Suco</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$6.50</span></h1>
-          <p class="w3-text-grey">Laranja, Uva, Maçã, Limão</p>
-          <hr>
-          
-          <h1><b>Long Neck</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$8.00</span></h1>
-          <p class="w3-text-grey">Eisenbahn, Budweiser, Stella Artois, Heineken, Brahma</p>
-          <hr>
-
-          <h1><b>Artesanais (consulte opções)</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$20.00</span></h1>
-          <p class="w3-text-grey">Schornstein, Roleta Russa, Colorado, Coruja</p>
         </div>
 
         <div id="Cart" class="w3-container menu w3-padding-32 w3-white">
-          <list-cart v-bind:cartlist="cart"></list-cart>
+          <list-cart v-bind:cartlist="cart" @bind_get_cart='get_cart'></list-cart>
         </div>
 
       </div>
@@ -142,3 +131,15 @@
   <script src="api/js/controller/cart.js"></script>  
   <script src="api/js/controller/w3schools.js"></script>
 </html>
+
+
+          <!-- <h1><b>Suco</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$6.50</span></h1>
+          <p class="w3-text-grey">Laranja, Uva, Maçã, Limão</p>
+          <hr>
+          
+          <h1><b>Long Neck</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$8.00</span></h1>
+          <p class="w3-text-grey">Eisenbahn, Budweiser, Stella Artois, Heineken, Brahma</p>
+          <hr>
+
+          <h1><b>Artesanais (consulte opções)</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$20.00</span></h1>
+          <p class="w3-text-grey">Schornstein, Roleta Russa, Colorado, Coruja</p> -->
