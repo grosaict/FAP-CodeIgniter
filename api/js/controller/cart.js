@@ -13,11 +13,11 @@ Vue.component('list-cart', {
                             <hr>\
                         </div>\
                         <div id="order_form" style="display:none">\
-                            <form action="submit_order(cartlist)">\
-                                <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Nome" required name="name"></p>\
-                                <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="(__) _____-____" required name="mobile"></p>\
-                                <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Pedido Especial" name="message"></p>\
-                                <p><button class="w3-button w3-light-grey w3-block w3-hover-red" type="submit">ENVIAR</button></p>\
+                            <form action="" method="post">\
+                                <p><input class="w3-input w3-padding-16 w3-border" type="text" id="name_client" name="name_client" placeholder="Nome" required></p>\
+                                <p><input class="w3-input w3-padding-16 w3-border" type="number" id="mobile" name="mobile" placeholder="celular" required></p>\
+                                <p><input class="w3-input w3-padding-16 w3-border" type="text" id="message" name="message" placeholder="Pedido Especial"></p>\
+                                <p><button class="w3-button w3-light-grey w3-block w3-hover-red" v-on:click="submit_order()">ENVIAR</button></p>\
                             </form>\
                         </div>\
                         <span v-for="(cart_item, index) of cartlist">\
@@ -35,7 +35,7 @@ Vue.component('list-cart', {
             axios
                 .delete('http://localhost:8888/api/cart/delete_pizza_cart/'+index_cart)
                 .then(response=>{
-                    console.log("Response (refresh cart[del]): ", response.data);
+                    console.log("Response (remove_from_cart): ", response.data);
                     this.refresh_cart();
                 });
         },
@@ -44,7 +44,7 @@ Vue.component('list-cart', {
             axios
                 .delete('http://localhost:8888/api/cart/clean_cart')
                 .then(response=>{
-                    console.log("Response (refresh cart[clean]): ", response.data);
+                    console.log("Response (clean_cart): ", response.data);
                     this.refresh_cart();
                 });
         },
@@ -56,12 +56,16 @@ Vue.component('list-cart', {
         {
             document.getElementById('order_form').style.display = "block";
         },
-        submit_order: function (cart)
+        submit_order: function ()
         {
+            client          = new Client();
+            client.name     = document.querySelector("#name_client").value;
+            client.mobile   = document.querySelector("#mobile").value;
+            client.message  = document.querySelector("#message").value;
             axios
-                .post('http://localhost:8888/api/order', cart)
+                .post('http://localhost:8888/api/order', client)
                 .then(response=>{
-                    console.log("Response (order): ", response);
+                    console.log("Response (submit_order): ", response.data);
                 });
         },
     },
@@ -70,7 +74,8 @@ Vue.component('list-cart', {
 var app = new Vue({
     el: "#Cart",
     data: {
-        cart:[]
+        cart:[],
+        order:{}
     },
     methods: {
         get_cart: function (){
@@ -78,14 +83,20 @@ var app = new Vue({
                 .get('http://localhost:8888/api/cart/get_cart')
                 .then(response=>{
                     this.cart = response.data;
-                    console.log("Response (cart): ", this.cart);
+                    console.log("Response (get_cart->cart): ", this.cart);
+                });
+            axios
+                .get('http://localhost:8888/api/order')
+                .then(response=>{
+                    this.order = response.data;
+                    console.log("Response (get_cart->order): ", this.order);
                 });
         },
     },
     created: function() {
         this.get_cart();
     },
-    // updated: function(){       DEIXA RENDERIZANDO EM LOOPING!!!!
+    // updated: function(){       RENDERIZA EM LOOPING!!!!
     //     this.get_cart();
     // }
 });

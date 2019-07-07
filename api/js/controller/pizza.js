@@ -15,7 +15,7 @@ Vue.component('list-pizzas', {
             axios
                 .post('http://localhost:8888/api/cart/add_pizza_cart', pizza)
                 .then(response=>{
-                    console.log("Response (cart_add): ", response);
+                    console.log("Response (cart_add): ", response.data);
                 });
         },
     },

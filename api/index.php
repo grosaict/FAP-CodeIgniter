@@ -2,8 +2,9 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-include_once 'controller/PizzaController.php';
 include_once 'controller/CartController.php';
+include_once 'controller/OrderController.php';
+include_once 'controller/PizzaController.php';
 require 'vendor/autoload.php';
 
 $app = new \Slim\App;
@@ -19,8 +20,8 @@ $app->group('/cart', function(){
     $this->delete('/clean_cart','CartController:clean_cart');
 });
 $app->group('/order', function(){
-    // $this->post('','OrderController:submit_order');
-    $this->get('','CartController:get_cart');
+    $this->get('','OrderController:get_order');
+    $this->post('','OrderController:submit_order');
 });
 
 try

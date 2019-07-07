@@ -1,7 +1,4 @@
 <?php
-    include_once 'model/Pizza.php';
-    include_once 'DAO/PizzaDAO.php';
-
     class CartController{
         public function get_cart($request, $response)
         {
@@ -21,9 +18,7 @@
         public function add_pizza_cart($request, $response, $args)
         {
             $pizza = (object) $request->getParsedBody();
-            if (!isset($_SESSION['pizzas_cart'])) {
-                session_start();
-            }
+            session_start();
             $_SESSION['pizzas_cart'][] = $pizza;
 
             $response = $response->withJson($_SESSION['pizzas_cart']);
@@ -50,7 +45,7 @@
                 }
                 $_SESSION['pizzas_cart'] = $new_cart;
             }
-            $response = $response->withJson($new_cart);
+            $response = $response->withJson($_SESSION['pizzas_cart']);
             $response = $response->withHeader('Content-type', 'application/json');    
             $response = $response->withStatus(202);
             return $response;
