@@ -70,7 +70,7 @@
         </div>
 
         <div id="Cart" class="w3-container menu w3-padding-32 w3-white">
-          <list-cart v-bind:cartlist="cart" @bind_get_cart='get_cart'></list-cart>
+          <list-cart v-bind:cartlist="cart" v-bind:total_cart="total_cart" @bind_get_cart='get_cart'></list-cart>
         </div>
 
       </div>
@@ -125,7 +125,10 @@
     </footer>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue2-filters/dist/vue2-filters.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="api/js/service/jquery-3.4.1.js"></script>    
+  <script src="api/js/service/viacep.js"></script>    
   <script src="api/js/model/client.js"></script>    
   <script src="api/js/controller/pizza.js"></script>    
   <script src="api/js/controller/cart.js"></script>  

@@ -46,36 +46,30 @@ class Pizzas extends CI_Controller {
         $this->load->view('pizzas/table', $data);
     }
 
-    public function new_pizza(){
-        $data['pizza'] = null;
-        $data['ingredients'] = $this->ingredients_model->return_all_ingredients();
-        $data['pizza_ingredients']  = null;
-        $this->load->helper('form');
-        $this->load->view('pizzas/form', $data);
-    }
-
     public function save_pizza(){
         //Salva o nome da pizza em uma row de um array
         $pizza = (object) array(
             'id_pizza'  => $this->input->post('id_pizza'),
-            'pizza'     => strtoupper($this->input->post('pizza'))
+            'pizza'     => strtoupper($this->input->post('pizza')),
+            'price'     => $this->input->post('price')
         );
         //Valida o nome da pizza informado pelo usuário
         if ($this->validate_new_pizza ($pizza)) {
             //Retorna a lista de ingredientes selecionada no formulário
-            $pizza_ingredients = $this->input->post('check');
+            $pizza_ingredients = $this->input->post('ing_checked');
 
             if ($pizza->id_pizza == null) {
-                //Insere pizza no BD e traz retorna seu id
+                //Insere pizza no BD e retorna seu id
                 $this->pizzas_model->insert_pizza($pizza);
                 $pizza->id_pizza  = $this->db->insert_id();
            } else {
+                //Atualiza nome e preço da pizza no BD
                 $this->pizzas_model->update_pizza($pizza);
                 //Excluir os ingredientes da pizza para atualização
                 $this->pizza_ingredients_model->delete_pizza_ingredients($pizza->id_pizza);
             }
             //Atualiza os ingredientes da pizza
-            isset($pizza_ingredients) ? $this->update_pizza_ingredient($pizza->id_pizza, $pizza_ingredients) : "";
+            isset($pizza_ingredients) ? $this->update_pizza_ingredients($pizza->id_pizza, $pizza_ingredients) : "";
              //Volta para a tabela mostrando msg de sucesso!
             $this->load->view('pages/success'); 
         } else {
@@ -83,6 +77,14 @@ class Pizzas extends CI_Controller {
             $this->load->view('pages/failed');
         }
         $this->list_all_pizzas();
+    }
+
+    public function new_pizza(){
+        $data['pizza'] = null;
+        $data['ingredients'] = $this->ingredients_model->return_all_ingredients();
+        $data['pizza_ingredients']  = null;
+        $this->load->helper('form');
+        $this->load->view('pizzas/form', $data);
     }
 
     public function update_pizza($id_pizza){
@@ -93,7 +95,7 @@ class Pizzas extends CI_Controller {
         $this->load->view('pizzas/form', $data);
     }
 
-    private function update_pizza_ingredient($new_id_pizza, $pizza_ingredients) {
+    private function update_pizza_ingredients($new_id_pizza, $pizza_ingredients) {
         foreach ($pizza_ingredients as $pizza_ingredients_item) :
             $pizza_ingredient = array(
                 'id_pizza'      => $new_id_pizza,

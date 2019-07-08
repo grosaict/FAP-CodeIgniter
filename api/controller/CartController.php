@@ -1,4 +1,6 @@
 <?php
+    include_once 'DAO/PizzaDAO.php';
+
     class CartController{
         public function get_cart($request, $response)
         {
@@ -31,7 +33,6 @@
         {
             session_start();
             $index_cart = (int) $args['index'];
-            $item_cart_deleted = $_SESSION['pizzas_cart'][$index_cart];
             if (count($_SESSION['pizzas_cart']) == 1)
             {
                 session_unset();
@@ -62,16 +63,17 @@
             return $response;
         }
 
-        public function count_cart($request, $response)
+        public function total_cart($request, $response)
         {
             session_start();
-            if (!isset($_SESSION['pizzas_cart'])) {
-                $count = 0;
-            } else {
-                $count = count($_SESSION['pizzas_cart']);
+            $dao            = new PizzaDAO;    
+            $total_cart = 0;
+            if (isset($_SESSION['pizzas_cart'])) {
+                foreach ($_SESSION['pizzas_cart'] as $item) {
+                    $total_cart += $dao->get_pizza($item->id_pizza)->price;
+                }
             }
-            echo $count;
-            $response = $response->withJson($count);
+            $response = $response->withJson($total_cart);
             $response = $response->withHeader('Content-type', 'application/json');    
             $response = $response->withStatus(201);
             return $response;

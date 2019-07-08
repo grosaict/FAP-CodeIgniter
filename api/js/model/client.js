@@ -1,5 +1,5 @@
 class Client{
-    id = false;
+    id = null;
     name;
     mobile;
     message;

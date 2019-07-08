@@ -7,9 +7,11 @@
     if (is_null($pizza)) {
         $html_id_pizza = null;
         $html_pizza    = "";
+        $html_price    = "";
     } else {
         $html_id_pizza = $pizza->id_pizza;
         $html_pizza    = $pizza->pizza;
+        $html_price    = $pizza->price;
     }
 ?>
 <form>
@@ -18,10 +20,14 @@
     <input type="hidden" name="id_pizza" value="<?php echo($html_id_pizza) ?>" />
     <input type="input" name="pizza" size="50" value="<?php echo($html_pizza) ?>"/>
     <br/>
+    <label for="price">Preço</label>
+    <br/>
+    <input type="input" name="price" value="<?php echo($html_price); ?>"/>
+    <br/>
     <input type="submit" name="submit" value="Salvar"/>
     <br/>
     <br/>
-    <label for="pizza">Adicionar/Editar Ingredientes</label>
+    <label for="ingredients">Adicionar/Editar Ingredientes</label>
     <br/>
     <?php
         foreach ($ingredients as $ingredients_item) :
@@ -32,7 +38,7 @@
                 endforeach;
             }
             echo '  <br/>';
-            echo '  <input type="checkbox" id="id_'.$ingredients_item['id_ingredient'].'" name="check[]" value="'.$ingredients_item['id_ingredient'].'"'.$checked.'>
+            echo '  <input type="checkbox" id="id_'.$ingredients_item['id_ingredient'].'" name="ing_checked[]" value="'.$ingredients_item['id_ingredient'].'"'.$checked.'>
                     <label for="id_'.$ingredients_item['id_ingredient'].'">'.$ingredients_item['ingredient'].'</label>';
         endforeach;
     ?>

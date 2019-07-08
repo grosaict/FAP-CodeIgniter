@@ -2,11 +2,14 @@
     class Order {
         public $id_order;
         public $client;
-        public $cart;
+        public $items;
+        public $date;
 
-        function __construct($client, $cart){
+        function __construct($id_order, $client, $items, $date){
+            $this->id_order = $id_order;
             $this->client   = $client;
-            $this->cart     = $cart;
+            $this->items    = $items;
+            $this->date     = $date;
         }
     }
 ?>

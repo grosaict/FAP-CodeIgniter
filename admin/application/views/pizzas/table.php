@@ -6,12 +6,14 @@
     <tr>
         <th>Nome</th>
         <th>Ingredientes</th>
+        <th>Preço</th>
         <th>Ações</th>
     </tr>
     <?php foreach ($pizzas as $pizzas_item): ?>
     <tr>
         <td><?php echo $pizzas_item['pizza']; ?></td>
         <td><?php echo $pizzas_item['pizza_ingredients']; ?></td>
+        <td><?php echo 'R$ '.number_format($pizzas_item['price'], 2, ',', '.'); ?></td>
         <td>
             <a href="<?php echo base_url('pizzas/delete_pizza/'.$pizzas_item['id_pizza']);?>">remover</a>
             <a>&nbsp</a>

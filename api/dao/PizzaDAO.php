@@ -6,6 +6,19 @@
 
     class PizzaDAO
     {
+        public function get_pizza($id_pizza)
+        {
+		    $query =   'SELECT * FROM tb_pizza
+                        WHERE id_pizza=:id_pizza';		
+    		$pdo = PDOFactory::getConexao();
+	    	$comando = $pdo->prepare($query);
+		    $comando->bindParam (":id_pizza", $id_pizza);
+    		$comando->execute();
+            $result = $comando->fetch(PDO::FETCH_OBJ);
+            $ingredients = $this->get_ingredients($result->id_pizza);
+            return new Pizza($result->id_pizza, $result->pizza, $result->price, $ingredients);          
+        }
+
         public function get_available_pizzas()
         {
 		    $query = 'SELECT * FROM tb_pizza';
@@ -16,7 +29,7 @@
 		    while($p_row = $comando->fetch(PDO::FETCH_OBJ)){
                 $ingredients = $this->get_ingredients($p_row->id_pizza);
                 if ($ingredients) {
-                    $pizza[] = new Pizza($p_row->id_pizza, $p_row->pizza, $ingredients);
+                    $pizza[] = new Pizza($p_row->id_pizza, $p_row->pizza, $p_row->price, $ingredients);
                 }
             }
             return new Pizzas($pizza);
