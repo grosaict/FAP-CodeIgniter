@@ -5,11 +5,16 @@ use \Psr\Http\Message\ResponseInterface as Response;
 include_once 'controller/CartController.php';
 include_once 'controller/OrderController.php';
 include_once 'controller/PizzaController.php';
+include_once 'controller/WeatherController.php';
 require 'vendor/autoload.php';
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 date_default_timezone_set('America/Sao_Paulo');
 
 $app = new \Slim\App;
+
+$app->group('/weather', function(){
+    $this->get('','WeatherController:get_weather');
+});
 
 $app->group('/pizza', function(){
     $this->get('/get_available','PizzaController:get_available_pizzas');

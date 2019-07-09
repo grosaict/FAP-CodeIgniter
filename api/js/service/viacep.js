@@ -19,7 +19,6 @@ $(document).ready(function() {
 
         //Verifica se campo cep possui valor informado.
         if (cep != "") {
-
             //Expressão regular para validar o CEP.
             var validacep = /^[0-9]{8}$/;
 

@@ -76,11 +76,18 @@ INSERT INTO tb_membership(username, password, status)
 -- Estrutura da tabela de pedidos
 
 CREATE TABLE IF NOT EXISTS tb_order (
-  id_order        int NOT NULL AUTO_INCREMENT,
-  id_client       int NOT NULL,
+  id_order        INT NOT NULL AUTO_INCREMENT,
+  id_client       INT,
   name_client     VARCHAR(66) NOT NULL,
-  mobile_client   int NOT NULL,
+  mobile_client   INT NOT NULL,
   message_client  VARCHAR(100),
+  cep             INT NOT NULL,
+  rua             VARCHAR(200) NOT NULL,
+  nro             VARCHAR(10),
+  complemento     VARCHAR(200),
+  bairro          VARCHAR(100) NOT NULL,
+  cidade          VARCHAR(100) NOT NULL,
+  uf              VARCHAR(2) NOT NULL,
   date_order      DATETIME NOT NULL,
   PRIMARY KEY     (id_order)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
@@ -88,10 +95,11 @@ CREATE TABLE IF NOT EXISTS tb_order (
 -- Estrutura da tabela de itens do pedido
 
 CREATE TABLE IF NOT EXISTS tb_items_order (
+  internal_id     int NOT NULL AUTO_INCREMENT,
   id_order        int NOT NULL,
   id_item         int NOT NULL,
   desc_item       varchar(80) NOT NULL,
   price_item      DECIMAL(5, 2) NOT NULL,
-  PRIMARY KEY     (id_order, id_item),
+  PRIMARY KEY     (internal_id),
   FOREIGN KEY     (id_order) REFERENCES tb_order(id_order)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;

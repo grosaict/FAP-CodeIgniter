@@ -40,6 +40,9 @@
         <span class="w3-text-white w3-hide-large w3-hide-medium" style="font-size:60px"><b>A arte<br>de fazer pizzas</b></span>
         <p><a href="#menu" class="w3-button w3-xxlarge w3-black">Conheça o cardápio</a></p>
       </div>
+      <div id="weather" class="w3-display-right w3-padding">
+        <span class="w3-tag w3-large"><show-weather v-bind:weather="weatherJSON"></show-weather></span>
+      </div>
     </header>
 
     <!-- Menu Container -->
@@ -130,6 +133,7 @@
   <script src="api/js/service/jquery-3.4.1.js"></script>    
   <script src="api/js/service/viacep.js"></script>    
   <script src="api/js/model/client.js"></script>    
+  <script src="api/js/controller/weather.js"></script>  
   <script src="api/js/controller/pizza.js"></script>    
   <script src="api/js/controller/cart.js"></script>  
   <script src="api/js/controller/w3schools.js"></script>

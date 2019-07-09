@@ -60,20 +60,32 @@ Vue.component('list-cart', {
         },
         show_order_form: function()
         {
-            document.getElementById('order_form').style.display = "block";
+            $('#order_form').show();
         },
         submit_order: function ()
         {
-            this.refresh_cart();
-            client          = new Client();
-            client.name     = document.querySelector("#name_client").value;
-            client.mobile   = document.querySelector("#mobile").value;
-            client.message  = document.querySelector("#message").value;
-            axios
-                .post('http://localhost:8888/api/order', client)
-                .then(response=>{
-                    console.log("Response (submit_order): ", response.data);
-                });
+            client                  = new Client();
+            client.name_client      = $("#name_client").val().toUpperCase();
+            client.mobile_client    = $("#mobile").val();
+            client.message_client   = $("#message").val().toUpperCase();
+            client.cep              = $("#cep").val();
+            client.rua              = $("#rua").html();
+            client.nro              = $("#nro").val();
+            client.complemento      = $("#complemento").val();
+            client.bairro           = $("#bairro").html();
+            client.cidade           = $("#cidade").html();
+            client.uf               = $("#uf").html();
+
+            if (Boolean(client.name_client.replace(" ", "")) && Boolean(client.mobile_client) && Boolean(client.cep)) {
+                this.refresh_cart();
+                axios
+                    .post('http://localhost:8888/api/order', client)
+                    .then(response=>{
+                        console.log("Response (submit_order): ", response.data);
+                    });
+                } else {
+                    alert("Favor preencher todos os campos.");
+                }
         },
     },
 })
