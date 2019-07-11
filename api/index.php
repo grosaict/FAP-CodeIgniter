@@ -19,6 +19,7 @@ $app->group('/weather', function(){
 $app->group('/pizza', function(){
     $this->get('/get_available','PizzaController:get_available_pizzas');
 });
+
 $app->group('/cart', function(){
     $this->get('/get_cart','CartController:get_cart');
     $this->get('/total_cart','CartController:total_cart');
@@ -26,6 +27,7 @@ $app->group('/cart', function(){
     $this->delete('/delete_pizza_cart/{index:[0-99]+}','CartController:delete_pizza_cart');
     $this->delete('/clean_cart','CartController:clean_cart');
 });
+
 $app->group('/order', function(){
     $this->get('','OrderController:get_last_orders');
     $this->post('','OrderController:submit_order');

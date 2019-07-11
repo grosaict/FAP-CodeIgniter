@@ -3,9 +3,9 @@ Vue.component('show-weather', {
     template: ' <div>\
                     <strong class="w3-xlarge">Porto Alegre / RS</strong><br/>\
                     <span class="w3-xxlarge">{{weather.temperatura}}ºC</span><br/>\
-                    <span>{{weather.tempo_desc}} {{weather.pressao}} hPa</span><br/>\
-                    <span>{{weather.umidade}}% de umidade</span><br/>\
-                    <span class="w3-medium">atualização {{weather.atualizacao}}</span>\
+                    <span>{{weather.tempo_desc}}</span><br/>\
+                    <span>{{weather.umidade}}</span><br/>\
+                    <span class="w3-medium">{{weather.atualizacao}}</span>\
                 </div>',
 });
 

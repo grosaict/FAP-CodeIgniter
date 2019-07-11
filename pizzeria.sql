@@ -3,7 +3,7 @@ SET time_zone = "-03:00";
 
 -- Base de Dados: pizzeria
 
-CREATE DATABASE IF NOT EXISTS pizzeria DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS pizzeria DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE pizzeria;
 
 

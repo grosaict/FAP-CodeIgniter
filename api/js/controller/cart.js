@@ -6,8 +6,8 @@ Vue.component('list-cart', {
                     </div>\
                     <div v-else>\
                         <div v-on:mouseover="refresh_cart">\
-                            <button class="w3-left w3-round w3-hover-red" v-on:click="clean_cart()">Limpar Carrinho</button>\
-                            <button class="w3-right w3-round w3-hover-red" v-on:click="show_order_form()">Realizar Pedido</button>\
+                            <button class="w3-left w3-round w3-black w3-border-black w3-hover-red w3-hover-border-red" v-on:click="clean_cart()">Limpar Carrinho</button>\
+                            <button class="w3-right w3-round w3-black w3-border-black w3-hover-red w3-hover-border-red" v-on:click="show_order_form()">Realizar Pedido</button>\
                             </br>\
                             <h1><b>Total</b> <span class="w3-right w3-tag w3-dark-grey w3-round">{{ total_cart | currency("R$", 2, { decimalSeparator: "," }) }}</span></h1>\
                             <hr>\
@@ -35,7 +35,7 @@ Vue.component('list-cart', {
                         <span v-for="(cart_item, index) of cartlist">\
                             <h1><b>{{cart_item.pizza}}</b> <span class="w3-right w3-tag w3-dark-grey w3-round">{{ cart_item.price | currency("R$", 2, { decimalSeparator: "," }) }}</span></h1>\
                             <span class="w3-text-grey" v-for="ing of cart_item.ingredients"> {{ing.ingredient}}, </span>\
-                            <button class="w3-right w3-round w3-hover-red" v-on:click="remove_from_cart(index)">Remover</button>\
+                            <button class="w3-right w3-round w3-hover-red w3-xlarge" v-on:click="remove_from_cart(index)">Remover</button>\
                             <hr>\
                         </span>\
                     </div>\
@@ -97,7 +97,7 @@ var app = new Vue({
         total_cart:{},
         orders:[]
     },
-    mixins: [Vue2Filters.mixin],
+    mixins: [Vue2Filters.mixin],    // Filters import to currency format
     methods: {
         get_cart: function (){
             axios

@@ -22,10 +22,11 @@
     <!-- Navbar (sit on top) -->
     <div class="w3-top w3-hide-small">
       <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
-        <a href="#" class="w3-bar-item w3-button">HOME</a>
+        <a href="" class="w3-bar-item w3-button">HOME</a>
         <a href="#menu" class="w3-bar-item w3-button">CARDÁPIO</a>
         <a href="#about" class="w3-bar-item w3-button">SOBRE</a>
         <a href="#googleMap" class="w3-bar-item w3-button">CONTATO</a>
+        <a href="#" class="w3-bar-item w3-button w3-display-middle">LOGIN</a>
         <a href="admin" class="w3-bar-item w3-button w3-right">RESTRITO</a>
       </div>
     </div>
@@ -67,13 +68,23 @@
         </div>
 
         <div id="Drinks" class="w3-container menu w3-padding-32 w3-white">
-          <h1><b>Refrigerante</b> <span class="w3-tag w3-grey w3-round">Popular</span> <span class="w3-right w3-tag w3-dark-grey w3-round">R$6.00</span></h1>
-          <p class="w3-text-grey">Pepsi, Teem, Sukita, Kuat</p>
-          <hr>
-        </div>
+            <h1><b>Refrigerante</b> <span class="w3-tag w3-grey w3-round">Popular</span> <span class="w3-right w3-tag w3-dark-grey w3-round">R$6,00</span></h1>
+            <p class="w3-text-grey">Pepsi, Teem, Sukita, Kuat</p>
+            <hr>
+
+            <h1><b>Suco</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$6,50</span></h1>
+            <p class="w3-text-grey">Laranja, Uva, Maçã, Limão</p>
+            <hr>
+            
+            <h1><b>Long Neck</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$8,00</span></h1>
+            <p class="w3-text-grey">Eisenbahn, Budweiser, Stella Artois, Heineken, Brahma</p>
+            <hr>
+
+            <h1><b>Artesanais (consulte opções)</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$20,00</span></h1>
+            <p class="w3-text-grey">Schornstein, Roleta Russa, Colorado, Coruja</p>        </div>
 
         <div id="Cart" class="w3-container menu w3-padding-32 w3-white">
-          <list-cart v-bind:cartlist="cart" v-bind:total_cart="total_cart" @bind_get_cart='get_cart'></list-cart>
+            <list-cart v-bind:cartlist="cart" v-bind:total_cart="total_cart" @bind_get_cart='get_cart'></list-cart>
         </div>
 
       </div>
@@ -111,7 +122,7 @@
         <p>Rua Espírito Santo, 348 - Centro Histórico - Porto Alegre - RS</p>
         <p><span class="w3-tag">ou ligue!</span>(51)<strong> 3221 4004</strong> e <strong>3221 5286</strong></p>
         <!-- Image of location/map -->
-        <!-- <iframe class="w3-image" style="width:100%;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.9997691028307!2d-51.232218685042135!3d-30.036864481885093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9519790363ba310d%3A0x21d923dc357715b!2sMargille!5e0!3m2!1spt-BR!2sbr!4v1559258939359!5m2!1spt-BR!2sbr" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+        <iframe class="w3-image" style="width:100%;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.9997691028307!2d-51.232218685042135!3d-30.036864481885093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9519790363ba310d%3A0x21d923dc357715b!2sMargille!5e0!3m2!1spt-BR!2sbr!4v1559258939359!5m2!1spt-BR!2sbr" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
         <p class="w3-xxlarge"><strong>Envie-nos</strong> uma mensagem:</p>
         <form action="/action_page.php" target="_blank">
           <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Nome" required name="Name"></p>
@@ -127,9 +138,9 @@
       <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
     </footer>
   </body>
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue2-filters/dist/vue2-filters.min.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="api/js/service/vue.js"></script>
+  <script src="api/js/service/vue2-filters.min.js"></script>
+  <script src="api/js/service/axios.min.js"></script>
   <script src="api/js/service/jquery-3.4.1.js"></script>    
   <script src="api/js/service/viacep.js"></script>    
   <script src="api/js/model/client.js"></script>    
@@ -138,15 +149,3 @@
   <script src="api/js/controller/cart.js"></script>  
   <script src="api/js/controller/w3schools.js"></script>
 </html>
-
-
-          <!-- <h1><b>Suco</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$6.50</span></h1>
-          <p class="w3-text-grey">Laranja, Uva, Maçã, Limão</p>
-          <hr>
-          
-          <h1><b>Long Neck</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$8.00</span></h1>
-          <p class="w3-text-grey">Eisenbahn, Budweiser, Stella Artois, Heineken, Brahma</p>
-          <hr>
-
-          <h1><b>Artesanais (consulte opções)</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$20.00</span></h1>
-          <p class="w3-text-grey">Schornstein, Roleta Russa, Colorado, Coruja</p> -->

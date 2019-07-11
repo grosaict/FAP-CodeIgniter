@@ -4,7 +4,7 @@ Vue.component('list-pizzas', {
                     <span v-for="pizza_item of pizzaslist">\
                         <h1><b>{{pizza_item.pizza}}</b> <span class="w3-right w3-tag w3-dark-grey w3-round">{{ pizza_item.price | currency("R$", 2, { decimalSeparator: "," }) }}</span></h1>\
                         <span class="w3-text-grey" v-for="ing of pizza_item.ingredients"> {{ing.ingredient}}, </span>\
-                        <button class="w3-right w3-round w3-hover-red" v-on:click="add_to_cart(pizza_item)">Adicionar</button>\
+                        <button class="w3-right w3-round w3-hover-red w3-xlarge" v-on:click="add_to_cart(pizza_item)">Adicionar</button>\
                         <hr>\
                     </span>\
                 </div>',
@@ -26,13 +26,13 @@ var app = new Vue({
     data: {
         pizzas:[]
     },
-    mixins: [Vue2Filters.mixin],
+    mixins: [Vue2Filters.mixin],    // Filters import to currency format
     methods:{
         load_available_pizzas: function(){
             axios
                 .get('http://localhost:8888/api/pizza/get_available')
                 .then(response=>{
-                    this.pizzas = response.data.pizzas;
+                    this.pizzas = response.data;
                     console.log("Response (pizzas): ", this.pizzas);
                 });
         },

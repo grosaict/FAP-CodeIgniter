@@ -1,6 +1,5 @@
 <?php
     include_once 'model/Pizza.php';
-    include_once 'model/Pizzas.php';
     include_once 'model/Ingredient.php';
 	include_once 'PDOFactory.php';
 
@@ -32,7 +31,7 @@
                     $pizza[] = new Pizza($p_row->id_pizza, $p_row->pizza, $p_row->price, $ingredients);
                 }
             }
-            return new Pizzas($pizza);
+            return $pizza;
         }
 
         public function get_ingredients($id_pizza)
